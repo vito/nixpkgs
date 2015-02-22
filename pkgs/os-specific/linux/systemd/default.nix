@@ -10,12 +10,12 @@ assert stdenv.isLinux;
 assert pythonSupport -> pythonPackages != null;
 
 stdenv.mkDerivation rec {
-  version = "217";
+  version = "219";
   name = "systemd-${version}";
 
   src = fetchurl {
     url = "http://www.freedesktop.org/software/systemd/${name}.tar.xz";
-    sha256 = "163l1y4p2a564d4ynfq3k3xf53j2v5s81blb6cvpn1y7rpxyccd0";
+    sha256 = "1ngj0d2wg6r58m4zycd2w0zkmkz71abbv0dl1h6h8z73ahs12msw";
   };
 
   patches =
@@ -29,6 +29,8 @@ stdenv.mkDerivation rec {
       /* cryptsetup */ libuuid m4 glib libxslt libgcrypt
       libmicrohttpd linuxHeaders
     ] ++ stdenv.lib.optionals pythonSupport [pythonPackages.python pythonPackages.lxml];
+
+  propagatedBuildInputs = [ libcap ];
 
   configureFlags =
     [ "--localstatedir=/var"

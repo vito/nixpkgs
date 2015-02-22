@@ -1,5 +1,5 @@
 { stdenv, fetchurl, pkgconfig, autoconf, automake, libtool
-, expat, systemd, glib, dbus_glib, python
+, expat, systemd, glib, dbus_glib, python, libcap
 , libX11, libICE, libSM, useX11 ? (stdenv.isLinux || stdenv.isDarwin) }:
 
 let
@@ -43,7 +43,7 @@ let
         '';
 
     nativeBuildInputs = [ pkgconfig ];
-    propagatedBuildInputs = [ expat ];
+    propagatedBuildInputs = [ expat libcap ];
     buildInputs = [ autoconf automake libtool ]; # ToDo: optional selinux?
 
     preConfigure = ''
@@ -108,4 +108,3 @@ let
   };
 };
 in attrs.libs // attrs
-

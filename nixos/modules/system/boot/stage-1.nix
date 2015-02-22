@@ -62,6 +62,9 @@ let
       cp -v ${pkgs.lvm2}/lib/libdevmapper.so.*.* $out/lib
       cp -v ${pkgs.systemd}/lib/libsystemd.so.* $out/lib
 
+      # Copy libcap.
+      cp -v ${pkgs.libcap}/lib/libcap.so.* $out/lib
+
       # Add RAID mdadm tool.
       cp -v ${pkgs.mdadm}/sbin/mdadm $out/bin/mdadm
 
